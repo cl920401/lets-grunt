@@ -4,18 +4,21 @@ English · [简体中文](README.zh-CN.md)
 
 Plan before touching the tree. Review the skeleton before writing business logic. Let's Grunt is a set of four Codex workflow skills with an optional read-only companion reviewer for projects that need explicit scope, documented contracts, and independent acceptance.
 
+## Main flow
+
+**Plan 1–3 → Spec 4–9 → Build 10–17 → stop at delivery.** Invoke each mode separately. Nothing is published or deployed by completing the main flow.
+
 | Invoke in Codex | Does | Does not |
 | --- | --- | --- |
 | `$lg-plan` | Explore goals, scope, and tradeoffs read-only | Write files or dispatch work |
 | `$lg-spec` | Design architecture, API/UI, data/DDL, and test methods in authorized docs | Write implementation, tests, configuration, or executable migrations |
 | `$lg-build` | Build the authorized slice from a pinned spec. Design the skeleton, then independently review executable stubs before business logic | Skip independent review or assume permission to push or release |
-| `$lg-refine` | Make a bounded, compatible change and run focused regression checks | Change the contract or silently expand scope |
 
 Use each mode separately. The agent proposes one concrete next step and its deliverable and limits, waits for your explicit confirmation, executes only that step, then reports evidence and pauses again. Calling a skill or approving the overall plan does not approve its steps. On Codex hosts that honor `agents/openai.yaml`, Spec, Build, and Refine are explicit-invocation only. Plan uses the host default. This setting governs skill selection, not filesystem access; use the host's read-only sandbox for a stronger guarantee when planning.
 
 See the [20 milestones and self-review gate](skills/lg-spec/references/WORKFLOW.md#numbered-milestones). Before proposing the next number, the agent checks the previous scope, evidence, exact version and gaps. Missing material evidence blocks progression; self-review does not replace independent review.
 
-## Every skill takes multiple rounds
+## How numbered steps advance
 
 Plan has **3** milestones, Spec **6**, Build **8**, and Refine **3**. A call does not run a whole mode. Once a confirmed milestone finishes, call the **same skill again** to work toward its next milestone. Start another mode only by calling it separately.
 
@@ -44,9 +47,11 @@ In multi-person work, verify the approver’s identity and authority and record 
 
 For example, once the product spec is ready, invoke `$lg-spec` again. The agent proposes **architecture only** and waits. Confirm that exact architecture step; the agent delivers it and stops. Call `$lg-spec` again for the next milestone. When Spec is frozen, invoke `$lg-build` separately.
 
-## Optional independent review
+## Optional branches
 
-In a new, independent Codex agent/session, invoke [`$lg-review`](skills/lg-review/SKILL.md) with the pinned candidate, SPEC, authorized paths, acceptance IDs and evidence. For standalone review, confirm the proposed candidate, read scope and report before inspection. It checks what is complete, failed, blocked or not run, and gives a way to verify the gaps. It neither changes the project nor runs its tests. It adds no milestone and cannot replace Build's independent runtime review or acceptance.
+- **Small compatible change (18–20):** Invoke `$lg-refine` for a bounded change such as clearer help text without changing behavior. If a contract needs to change, return to `$lg-spec` instead.
+- **Independent review on demand:** In a new, independent Codex agent/session, invoke [`$lg-review`](skills/lg-review/SKILL.md) with the pinned candidate, SPEC, authorized paths, acceptance IDs and evidence. For standalone review, confirm the proposed candidate, read scope and report before inspection. It checks what is complete, failed, blocked or not run, and gives a way to verify the gaps. It neither changes the project nor runs its tests. It adds no milestone and cannot replace Build's independent runtime review or acceptance.
+- **Release or operations, only if needed after step 17:** A production deployment is a separate action, not part of delivery. Confirm the exact candidate, target, verification, and rollback before proceeding.
 
 ## Install and remove
 
