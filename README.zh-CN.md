@@ -59,7 +59,7 @@
 python3 scripts/check.py
 ```
 
-非平凡的跨会话交接可用 [CHANGE.md 模板](skills/lg-spec/references/CHANGE.md)，在授权位置记录已锁定输入、复核证据和下一步。同一会话里的微小变更不用另建文档。
+非平凡的跨会话交接可用 [CHANGE.md 模板](skills/lg-spec/references/CHANGE.md)，在授权位置记录已锁定输入、复核证据和下一步。同一会话里的微小变更不用另建文档。跨上下文只传已锁定引用、硬约束和必要证据，独立复核默认不带原聊天或开发结论。
 
 [验证记录](VALIDATION.md)说明实际跑过的检查；维护者可参考[发布核对单](RELEASE-CHECKLIST.md)。
 

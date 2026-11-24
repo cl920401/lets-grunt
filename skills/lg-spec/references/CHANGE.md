@@ -9,6 +9,7 @@ Use for a substantive change handed to another session, agent, or reviewer. Reus
 | Skeleton review | Exact artifact version, independent reviewer, checks and result or BLOCKED |
 | Implementation | Exact candidate version, changed paths, developer checks |
 | Independent acceptance | Reviewer, exact implementation version, checks and outcomes or BLOCKED |
+| Review context | Pinned inputs, allowed paths, exact check commands, expected outcomes, untested items and factual evidence only; keep any developer verdict outside the reviewer handoff |
 | Next eligible step | What can proceed now, untested areas and what would unblock remaining work |
 
 A green skeleton check is not implementation acceptance. Do not carry a review forward to changed evidence without rechecking affected areas.

@@ -1,0 +1,42 @@
+{
+  "role": "development",
+  "sources": {
+    "spec": {
+      "path": "README.md",
+      "sha256": "616188a6fac5ec4b9c30d312f4fb9426ab0298e1a43ae4fa94c45db749d12746"
+    },
+    "change": {
+      "path": "HANDOFF-CHANGE.md",
+      "sha256": "3ccf622c6c498a5eb2510fea33b5bf15cca6ce8541cd41e274dc24f6178e4f87"
+    },
+    "candidate": {
+      "path": "slug.py",
+      "sha256": "911219b54fa225a3ce81a82009dcc3ef5caa96060b12b233ea8d3e2cdc40cf95"
+    }
+  },
+  "allowed_paths": [
+    "slug.py",
+    "test_skeleton.py"
+  ],
+  "hard_constraints": {
+    "external_actions": "No network, remote operations or persistent data.",
+    "non_goals": "No UI, database or business implementation before review.",
+    "invariants": "The skeleton must never report a successful conversion.",
+    "failure_behavior": "Return exit 3, empty stdout and explicit not-implemented stderr.",
+    "acceptance": [
+      "T3 is the skeleton check.",
+      "T1/T2 remain for later implementation acceptance."
+    ],
+    "provenance": "Resolve exact SHA-256 versions from sources in this packet. No inherited approval."
+  },
+  "expected_checks": [
+    "python3 -B -m unittest discover -s examples/slug-skeleton"
+  ],
+  "facts": [
+    "The CLI accepts one argument and calls the typed make_slug stub. Nothing has been independently accepted by this fixture."
+  ],
+  "design_notes": [
+    "Route the explicit not-implemented failure into stderr."
+  ],
+  "developer_verdict": "EXAMPLE ONLY: developer believes the wiring is ready for review, not approval."
+}

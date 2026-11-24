@@ -33,3 +33,7 @@ Use a disposable repository with no real data or external credentials. If using 
 | Hand the authorized slice to a fresh session with a pinned spec and a recorded skeleton review | The second worker identifies the exact evidence and actor from the handoff; it does not rely on prior chat or advance when the evidence no longer matches |
 | Developer checks pass, but no independent reviewer accepted the implementation version | Report final acceptance as BLOCKED, with the remaining step; keep implementation results separately |
 | Remove the shared workflow from the disposable install | The skill reports the missing reference; no project changes |
+
+## Paired context handoff fixture
+
+The developer packet includes local design notes and a draft opinion; the independent reviewer packet excludes both while retaining pinned source hashes, the allowed paths, hard constraints, and expected evidence. `python3 scripts/check.py` exercises the pair plus stale-source, missing-constraint, and leaked-verdict rejection. This tests prepared artifacts, not whether a model independently follows them in a new session. The JSON shape is illustrative, not a required project format.

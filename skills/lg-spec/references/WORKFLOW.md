@@ -23,6 +23,14 @@ Freeze a coherent version before implementation. Keep existing document organiza
 
 Use a common specification version or commit and one owner per writable path. Each role card names the role, task ID, pinned inputs, requirement/test IDs, allowed files, non-goals, prerequisites, verification method, expected evidence, stop condition and status. Report blocked dependencies explicitly. Separate product clarification, development, independent review/testing and coordination. A card is not authorization or proof that an agent ran. If a file is not yet written, include its exact text or a verified readable input rather than a future path.
 
+### Context handoff
+
+Share the facts a recipient needs, not a transcript of the conversation. Plan ends with a pasteable decision/unknowns brief; Spec verifies source anchors and keeps confirmed constraints separate from pending decisions. For substantive or multi-stage Build work use separate clean development and independent review contexts when the host supports them. Keep truly local, small work in the current context if that is sufficient and briefly record why; this does not waive any independent gate. If clean contexts are unavailable, provide a safe handoff instead of claiming one was opened or resuming on a recipient’s behalf.
+
+A developer handoff carries pinned SPEC/CHANGE references, the allowed slice and material design decisions. An independent reviewer receives the exact candidate and pinned SPEC/CHANGE references, allowed paths, exact check commands, expected outcomes, untested items and factual evidence; exclude the full chat and developer verdict by default. If a shared CHANGE record contains a developer verdict, point the reviewer only to its factual sections or supply a clean projection. The reviewer checks the authority and actual results independently.
+
+Compress narrative, not constraints. Carry write and external-action limits, non-goals, invariants, failure behavior, acceptance expectations and provenance even if that makes the handoff longer. Use selective anchors to things the recipient can read, and verify their authoritative versions before acting. Missing, stale or conflicting inputs block the affected work; do not inherit chat approvals or infer new authority from the handoff.
+
 ### Evidence that survives a new session
 
 - **Spec handoff:** record the exact specification path and revision (commit or content digest), affected requirement IDs, agreed write paths and the validations expected. Unwritten or mutable inputs are not pinned.
@@ -43,7 +51,7 @@ Implement the approved slice with its pinned inputs and constraints. Developers 
 
 ## Refine
 
-Use the existing contract for one scoped, compatible improvement. Preserve work outside the allowed paths and do not weaken expectations to get a green test. Verify the smallest relevant regression and note untested effects. If the externally observable contract or architectural boundary would change, stop the affected part and return to Spec only through a separately directed invocation.
+Use the existing contract for one scoped, compatible improvement. Preserve work outside the allowed paths and do not weaken expectations to get a green test. For changed in-scope behavior, record focused regression evidence and note untested effects; add tests only in allowed paths and mark the required check blocked if you cannot run or supply it. If the externally observable contract or architectural boundary would change, stop the affected part and return to Spec only through a separately directed invocation.
 
 ## Final checks
 
