@@ -2,20 +2,66 @@
 
 The four entry points install as adjacent directories. This authoritative reference and its optional template live inside the Spec skill; do not install or package any entry point in isolation. This file is shared guidance, not another command. If an entry point is narrower than this file, the entry point wins. Selection alone, agreement on a design, a prior mode, successful QA and standing permission for other work do not authorize a new mode, slice, path or external action. Already authorized work may continue within its scope; never advance modes automatically. These instructions are not a sandbox.
 
+## One confirmed step at a time
+
+This applies to Plan, Spec, Build and Refine. Before doing project work, propose only the next concrete step: state its action and target, evidence or deliverable, and what it will not modify or do. Then wait for the user’s explicit confirmation of that step. A skill invocation, general direction, old or blanket approval, or assent to a different proposal does not authorize it. If the reply is ambiguous, name the proposed step and ask plainly. If the latest user message clearly confirms that exact pending proposal, do not ask twice.
+
+Execute the confirmed step only, and stop at its boundary even if follow-on work looks obvious. Report actual evidence, outcome and blockers, then stop. You may identify the next eligible milestone for orientation; do not propose it for confirmation until the user re-enters the same mode. Starting a different mode requires a separate invocation. One step can involve several necessary tool calls, not several deliverables or gates. If scope or deliverable must change, stop and propose the revised step instead of treating the old confirmation as permission. Confirmation never expands the mode, tool permissions or external-action authorization; no automatic mode switch, push, deploy or release.
+
+## Authority and audit trail
+
+Before execution, bind the exact confirmation to the mode, numbered step or correction ID, pinned revision, scope, deliverable, allowed paths and external-action limits. Record the requester, executor, reviewer and human approver roles where applicable. In multi-person work, use a verified account and an authoritative role or scoped delegation record to confirm that the human approver can approve that exact action; a display name, forwarded assent and executor or reviewer status alone are not proof. Retain the original confirmation reference and the authority reference, not entire conversations or secrets.
+
+Record that decision in an authorized durable log or existing scoped record before execution. After the step, append the actual outcome, version, check evidence and blockers, including when the step was denied or did not run, where authorized. If multi-person identity, adequate authority, or a durable authorized record cannot be verified, mark the step BLOCKED; do not execute. Plan remains project-read-only: a durable authorized conversation or approval record can be the trail, with no writes to project files. Solo work still records each step via existing safe handoff/evidence, without unnecessary identity checks. Do not create a new tracking destination or widen access without authorization. A single valid confirmation is enough.
+
+## Self-review before asking for the next step
+
+Before proposing a numbered step, check the previous step’s specific scope, expected evidence, exact version, and unresolved gaps against its confirmed proposal. At the first step, check only the supplied prerequisites and say there is no prior output. A justified N/A may be recorded; missing, stale, conflicting or failed material evidence is BLOCKED. Report what is wrong and what is still safe to keep. If new corrective execution is needed, propose one named correction within the affected step and wait for confirmation; do not propose later work as though the issue were resolved. Do not reexecute an already-completed confirmed step or ask to confirm it again. For Build, reconcile the module ledger against exact-version proof before proposing the next milestone. Self-review is neither user approval nor independent review.
+
+## Numbered milestones
+
+Use the next applicable number in order. Each numbered item is one separately confirmed milestone; the finer actions below are its scope, not automatic advancement. Mark N/A with a reason rather than silently skipping. Return to the affected milestone to correct blockers. Keep the dedicated independent gates even when an earlier review succeeded.
+
+| # | Mode | Step and expected outcome |
+| --- | --- | --- |
+| 1 | Plan | Inspect the current project read-only: users, existing code or workflow, known constraints. |
+| 2 | Plan | Define goals and boundaries: what the first version includes and excludes, and how to judge success. |
+| 3 | Plan | Return a pasteable discussion brief separating decisions, assumptions, open issues and blockers; do not write a file. |
+| 4 | Spec | Draft product specification: user flow, business rules, states, failures and acceptance measures. |
+| 5 | Spec | Design architecture: modules, key call flow, data ownership, dependencies and open-source reuse, recovery. |
+| 6 | Spec | Design API and UI/CLI interactions: inputs, outputs, errors, permissions, states, compatibility. |
+| 7 | Spec | Design the data model and DDL: tables, indexes, constraints, transactions, migration and rollback. Markdown review only; no SQL execution. |
+| 8 | Spec | Design test methods: in-scope behavior versus denial/degradation at boundaries; case, environment, fixture, trigger, expectation and evidence. |
+| 9 | Spec | Cross-check and freeze the exact SPEC: align architecture/API/DDL/UI/tests; record version, task division, writable files and blockers. |
+| 10 | Build | Design the smallest skeleton: call flow, signatures, wiring and pseudocode in a sketch, without writing functions or business logic. |
+| 11 | Build | Create buildable skeleton with wired interfaces and explicit not-implemented outcomes, without real side effects. |
+| 12 | Build | Independently review the exact skeleton’s signatures, wiring and build evidence. A failure blocks business logic. |
+| 13 | Build | Implement the approved slice and relevant tests. Separate development and test roles; contract conflicts go to Spec, not altered acceptance. |
+| 14 | Build | Developer self-tests: applicable build, static checks, unit/integration tests; capture commands, version and omissions. |
+| 15 | Build | Independent code review and retest: the reviewer reports findings only. Any correction requires a separately confirmed developer action with bounded scope and a refreshed candidate digest; the independent reviewer retests that exact corrected candidate. No developer self-signoff. |
+| 16 | Build | Independent acceptance of realistic operation paths; as needed, test end-to-end, recovery, performance and deployment rehearsal. Missing evidence is BLOCKED. |
+| 17 | Build | Deliver and evaluate: verify documentation, configuration and startup, compare measured outcomes to goals, report gaps/risks and a recommendation. |
+| 18 | Refine | Agree on one compatible refinement and regression points, including behavior that must stay unchanged. |
+| 19 | Refine | Make one approved change only; fill relevant test gaps only within the approved paths. |
+| 20 | Refine | Run targeted regression and report. Repeat the affected independent review if a core boundary changes; stop and return to Spec if a contract must change. |
+
+Commit, push, actual migration, deployment and release are outside this list; when eligible, propose and confirm them separately, never as a hidden substep.
+
 ## Planning
 
-Start with a concrete user and desired outcome, the smallest usable path, non-goals and one recommended tradeoff. Check source facts without writing. Ask questions only when the answer could change architecture, product behavior, authority, distribution rights or material cost; state reversible assumptions instead of asking by default. Identify verified facts, decisions, assumptions and blockers separately. A fixture illustrates acceptance; it is not the product.
+For the confirmed read-only planning step, start with a concrete user and desired outcome, the smallest usable path, non-goals and one recommended tradeoff. Check source facts without writing. Ask questions only when the answer could change architecture, product behavior, authority, distribution rights or material cost; state reversible assumptions instead of asking by default. Identify verified facts, decisions, assumptions and blockers separately. A fixture illustrates acceptance; it is not the product.
 
 ## Specification
 
-Freeze a coherent version before implementation. Keep existing document organization; a small project may combine sections. Only write within the authorized documentation scope. If an input is missing, document the question, recommended default, consequence, and affected work; independent parts can continue.
+Freeze a coherent version before implementation. Keep existing document organization; a small project may combine sections. Only write within the authorized documentation scope. If an input is missing, document the question, recommended default, consequence, and affected work; independent parts can continue. After recording goals, propose and confirm each applicable design step separately: architecture → API/UI → data/DDL → test methods → cross-check and freeze. This is a drafting order, not permission to run anything; reconcile dependencies before freezing the specification. Scale depth to risk, use a single page when enough, and mark inapplicable items N/A with a brief reason.
 
 | Contract | Evidence or decision needed |
 | --- | --- |
 | Goals and scope | Actors, usable path, non-goals, behavioral invariants, failure expectations and measurable acceptance with stable IDs such as R1. Quantitative claims need a workload and measurement method. |
-| Architecture | Module ownership, request flow, data authority, trust/deployment boundaries, errors and recovery. Explain decisions, rejected options and reconsideration conditions. |
-| Data | If applicable: schema, constraints, indexes, concurrency, transactions, retention, cache/queue semantics and recovery. A Markdown DDL draft is review-only; do not create migrations or execute SQL in Spec. State why data design is inapplicable if none. |
-| Interfaces and UX | Examples, input/output, roles, errors, state transition, compatibility, retry/timeout/idempotency as needed. Map UI or CLI flows to contracts, including loading, denial, retry and recovery where applicable. |
+| 1. Architecture | Module ownership, request flow, data authority, trust/deployment boundaries, errors and recovery. Explain decisions, rejected options and reconsideration conditions. |
+| 2. API and UI/CLI | Examples, input/output, roles, errors, state transition, compatibility, retry/timeout/idempotency as needed. Map UI or CLI flows to contracts, including loading, denial, retry and recovery where applicable. |
+| 3. Data and DDL | If applicable: schema, constraints, indexes, concurrency, transactions, retention, cache/queue semantics and recovery. A Markdown DDL draft is review-only; do not create migrations or execute SQL in Spec. State why data design is inapplicable if none. |
+| 4. Test methods | For each material requirement, record a case ID, fixture/environment, trigger (normal input or, where relevant, a benign simulated dependency failure), assertion and what observation decides pass/fail. Describe what a separate reviewer should check and retain, and distinguish skeleton checks from final behavior checks. Plan tests only; do not execute them in Spec. |
 | Reuse and authority | Separate actual dependencies from candidates. Record primary source, pinned version, applicable license, reuse boundary and exit plan. For access or AI features, document identities, isolation, revocation, egress, usage source and unknown outcomes. |
 | Acceptance | Map requirements to implementation seams and assertions, environment and evidence. In-scope failure calls for repair; explicitly unsupported behavior tests expected rejection or degradation, not expansion. |
 
@@ -39,7 +85,17 @@ Compress narrative, not constraints. Carry write and external-action limits, non
 
 ## Build
 
+Confirm these steps separately: design the skeleton, prepare the runnable skeleton, run independent skeleton review, implement the authorized slice, run developer self-tests, run independent review/retest, run independent acceptance, and deliver with outcome evaluation. A passed review does not itself authorize the next step.
+
+### Module progress
+
+Maintain one row per active submodule in the authorized [CHANGE.md](CHANGE.md) or an existing task sheet. Record module, development and test owners as applicable, development status, test/independent status, bound candidate revision or digest, evidence and blockers. Update after each authorized Build milestone within the same step’s approved scope; if no writable destination was authorized, return the updated rows in the result instead. This adds no confirmation milestone, file write or external tool by default.
+
+Keep development and testing independent: implemented or developer-tested does not mean independently accepted. Associate each result with its exact version, preserve prior results as history, and mark affected tests pending or blocked when a changed candidate needs recheck. At self-review, verify both tracks against exact-version proof; never advance one track by inference from the other.
+
 ### A. Skeleton before logic
+
+At milestone 10, design one useful vertical slice with a compact diagram or table showing its entry point, dependencies, typed signatures or contracts, and explicit not-implemented outcome. Use pseudocode for validation, authorization, sequencing, side-effect, transaction and failure boundaries as applicable. Deliver a sketch only; do not create runnable stubs until milestone 11 is separately confirmed.
 
 For the smallest useful vertical slice, wire typed signatures and replaceable boundaries; use explicit not-implemented states, never fake a valid result. Do not call real dependencies, mutate data or run migrations in this skeleton phase. Use inline or same-version pseudocode to map requirements to validation, authorization, side effects, transaction and error boundaries, and applicable timeout/retry/compensation rules. Omit irrelevant mechanics but make boundary decisions explicit.
 
@@ -51,7 +107,7 @@ Implement the approved slice with its pinned inputs and constraints. Developers 
 
 ## Refine
 
-Use the existing contract for one scoped, compatible improvement. Preserve work outside the allowed paths and do not weaken expectations to get a green test. For changed in-scope behavior, record focused regression evidence and note untested effects; add tests only in allowed paths and mark the required check blocked if you cannot run or supply it. If the externally observable contract or architectural boundary would change, stop the affected part and return to Spec only through a separately directed invocation.
+For each refinement, confirm scope, implementation and regression as separate steps. Use the existing contract for one scoped, compatible improvement. Preserve work outside the allowed paths and do not weaken expectations to get a green test. For changed in-scope behavior, record focused regression evidence and note untested effects; add tests only in allowed paths and mark the required check blocked if you cannot run or supply it. If the externally observable contract or architectural boundary would change, stop the affected part and return to Spec only through a separately directed invocation.
 
 ## Final checks
 
