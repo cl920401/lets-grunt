@@ -1,5 +1,7 @@
 # Let's Grunt
 
+English · [简体中文](README.zh-CN.md)
+
 Plan before touching the tree. Review the skeleton before writing business logic. Let's Grunt is a set of four Codex skills for projects that need explicit scope, documented contracts, and independent acceptance.
 
 | Invoke in Codex | Does | Does not |
@@ -13,7 +15,7 @@ Use each mode separately; no mode automatically invokes another. On Codex hosts 
 
 ## Install and remove
 
-Inspect the four directories under [skills](skills) and their [shared workflow](skills/lg-spec/WORKFLOW.md). From the unpacked package directory on macOS or Linux:
+Inspect the four directories under [skills](skills) and their [shared workflow](skills/lg-spec/references/WORKFLOW.md). From the unpacked package directory on macOS or Linux:
 
 ```sh
 (
@@ -32,7 +34,7 @@ Inspect the four directories under [skills](skills) and their [shared workflow](
 )
 ```
 
-For a project-only install, use the target repository's absolute `.agents/skills` path instead. Do not install in both scopes. Copy all four folders together, including `agents/` and `lg-spec/WORKFLOW.md`. In a fresh Codex session, check that each name appears once, then try Plan in a disposable project. See [Codex Skills](https://developers.openai.com/codex/skills) for discovery and policy details.
+For a project-only install, use the target repository's absolute `.agents/skills` path instead. Do not install in both scopes. Copy all four folders together, including `agents/` and `lg-spec/references/WORKFLOW.md`. In a fresh Codex session, check that each name appears once, then try Plan in a disposable project. See [Codex Skills](https://developers.openai.com/codex/skills) for discovery and policy details and the [Agent Skills specification](https://agentskills.io/specification) for the file format. The four skills are a bundle, not standalone packages. Codex is the target; other clients are not covered by these checks.
 
 To remove or upgrade, move only the four installed folders out of the search path into a new backup directory. Do not delete the whole skills root. Older tools are not modified or removed by this package.
 
@@ -40,7 +42,7 @@ To remove or upgrade, move only the four installed folders out of the search pat
 
 - Start a fresh Codex session in the project where you want to use the skill. Check that each exact folder contains its matching `SKILL.md`. Do not nest the package root itself under the skills path.
 - If a command appears twice, check the user skill directory, the project skill directory, and enabled plugins for the same name. Keep only the intended copy.
-- If a command reports a missing workflow, restore `lg-spec/WORKFLOW.md` and install the four folders as siblings. Do not copy rules into the project or bypass the gate.
+- If a command reports a missing workflow, restore `lg-spec/references/WORKFLOW.md` and install the four folders as siblings. Do not copy rules into the project or bypass the gate.
 
 ## Try it on a tiny CLI
 
@@ -56,6 +58,8 @@ The [sample skeleton and acceptance matrix](examples/slug-skeleton/README.md) de
 ```sh
 python3 scripts/check.py
 ```
+
+For a nontrivial change across sessions, use the [CHANGE.md template](skills/lg-spec/references/CHANGE.md) to record pinned inputs, review evidence, and the next eligible step in an authorized docs path. Tiny same-session changes need no extra file.
 
 See [verification results](VALIDATION.md) for what this candidate actually tested. See the [release checklist](RELEASE-CHECKLIST.md) for maintainer checks.
 

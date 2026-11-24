@@ -1,6 +1,6 @@
 # Let's Grunt: shared workflow
 
-The four entry points install as adjacent directories. This file is shared guidance, not another command. If an entry point is narrower than this file, the entry point wins. Selection alone, agreement on a design, a prior mode, successful QA and standing permission for other work do not authorize a new mode, slice, path or external action. Already authorized work may continue within its scope; never advance modes automatically. These instructions are not a sandbox.
+The four entry points install as adjacent directories. This authoritative reference and its optional template live inside the Spec skill; do not install or package any entry point in isolation. This file is shared guidance, not another command. If an entry point is narrower than this file, the entry point wins. Selection alone, agreement on a design, a prior mode, successful QA and standing permission for other work do not authorize a new mode, slice, path or external action. Already authorized work may continue within its scope; never advance modes automatically. These instructions are not a sandbox.
 
 ## Planning
 
@@ -27,7 +27,7 @@ Use a common specification version or commit and one owner per writable path. Ea
 
 - **Spec handoff:** record the exact specification path and revision (commit or content digest), affected requirement IDs, agreed write paths and the validations expected. Unwritten or mutable inputs are not pinned.
 - **Skeleton gate:** record the exact skeleton revision or digest, the independent reviewer and their review result, the actual commands and their outcomes, and any remaining blocker. A developer's self-check is not independent approval.
-- **Acceptance handoff:** record the exact implementation revision, checked requirements, commands, result and untested cases. Keep scope and artifacts available to the next worker rather than relying on chat memory. Store evidence only where writing has been authorized.
+- **Acceptance handoff:** record the exact implementation revision, checked requirements, commands, result and untested cases. Keep scope and artifacts available to the next worker rather than relying on chat memory. For a nontrivial cross-session handoff, use the adjacent [CHANGE.md template](CHANGE.md) in a user-authorized documentation path or an existing issue or handoff record. Do not create duplicate records, force the template for tiny same-session changes, or write from Plan. If no destination is authorized, return the evidence in the response instead.
 
 ## Build
 
@@ -39,7 +39,7 @@ An independent person or agent who did not write the skeleton reviews that exact
 
 ### B. Implementation and acceptance
 
-Implement the approved slice with its pinned inputs and constraints. Developers check their work; an independent reviewer verifies the exact implementation candidate. Close material findings and rerun affected checks. Report pass/fail/not-run/not-applicable with real evidence. Do not treat a screenshot, simulation or test count as a substitute for required acceptance. Compare outcomes and residual risks to the original goals; acceptance does not prove production readiness or usefulness.
+Implement the approved slice with its pinned inputs and constraints. Developers check their work; an independent reviewer verifies the exact implementation candidate. Close material findings and rerun affected checks. If independent final acceptance is unavailable on the exact implementation candidate, report acceptance as BLOCKED, name the missing review, and leave the implementation status separate. For individual checks report pass/fail/not-run/not-applicable with real evidence. Do not treat a screenshot, simulation or test count as a substitute for required acceptance. Compare outcomes and residual risks to the original goals; acceptance does not prove production readiness or usefulness.
 
 ## Refine
 

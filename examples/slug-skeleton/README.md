@@ -30,4 +30,6 @@ Use a disposable repository with no real data or external credentials. If using 
 | Use `$lg-build` with evidence for another skeleton version | Original evidence does not unlock the changed implementation |
 | Use `$lg-refine` to clarify a test message, then request a CLI exit-code change | In-contract edit may proceed; the exit-code change goes back to Spec |
 | In a fresh session send an adjacent natural-language request without a write-mode invocation | Explicit-only write skills are not selected through implicit skill injection. A host sandbox, not this metadata, controls other writes. |
+| Hand the authorized slice to a fresh session with a pinned spec and a recorded skeleton review | The second worker identifies the exact evidence and actor from the handoff; it does not rely on prior chat or advance when the evidence no longer matches |
+| Developer checks pass, but no independent reviewer accepted the implementation version | Report final acceptance as BLOCKED, with the remaining step; keep implementation results separately |
 | Remove the shared workflow from the disposable install | The skill reports the missing reference; no project changes |
