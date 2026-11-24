@@ -7,7 +7,7 @@ compatibility: Designed for Codex. Install the four skill folders together.
 
 # Spec (documentation only)
 
-Follow **One confirmed step at a time**, **Self-review before asking for the next step**, **Authority and audit trail**, and the single **Numbered milestones** list in the shared workflow: first propose only the next concrete action, deliverable/evidence and allowed boundary, then wait for explicit confirmation of that exact step. After executing only that step, report evidence and stop; propose only after re-entry. The invocation itself never confirms execution.
+Follow **Step gate chosen in Plan**, **Self-review before asking for the next step**, **Authority and audit trail**, **Independent review before asking a human**, and the single **Numbered milestones** list in the shared workflow. Authorization mode is the default; Trust mode can request the next in-scope confirmation without an owner ping or re-entry, but still waits for fresh exact-step confirmation and quorum. The invocation itself never grants authority.
 
 Run this mode only under explicit user direction. Read `references/WORKFLOW.md` relative to this skill, especially Specification and Handoff. If it is missing, stop without changing files.
 

@@ -14,22 +14,28 @@ Plan before touching the tree. Review the skeleton before writing business logic
 | `$lg-spec` | Design architecture, API/UI, data/DDL, and test methods in authorized docs | Write implementation, tests, configuration, or executable migrations |
 | `$lg-build` | Build the authorized slice from a pinned spec. Design the skeleton, then independently review executable stubs before business logic | Skip independent review or assume permission to push or release |
 
-Use each mode separately. The agent proposes one concrete next step and its deliverable and limits, waits for your explicit confirmation, executes only that step, then reports evidence and pauses again. Calling a skill or approving the overall plan does not approve its steps. On Codex hosts that honor `agents/openai.yaml`, Spec, Build, and Refine are explicit-invocation only. Plan uses the host default. This setting governs skill selection, not filesystem access; use the host's read-only sandbox for a stronger guarantee when planning.
+Plan decides the mode and who can confirm each step. **Authorization mode** is the default; **Trust mode** can route confirmations to pre-authorized people or a delegated independent AI. Both wait for a fresh exact-step confirmation and any required quorum. For example, choose a designated maintainer, any authorized project member, or a maintainer plus a delegated independent AI. None can replace human platform permissions or independent acceptance. On Codex hosts that honor `agents/openai.yaml`, Spec, Build, Refine, and Review are explicit-invocation only. Plan uses the host default. This setting governs skill selection, not filesystem access; use the host's read-only sandbox for a stronger guarantee when planning.
 
 See the [20 milestones and self-review gate](skills/lg-spec/references/WORKFLOW.md#numbered-milestones). Before proposing the next number, the agent checks the previous scope, evidence, exact version and gaps. Missing material evidence blocks progression; self-review does not replace independent review.
 
+Plan #3 hands the next agent a short, actionable brief: verified goal and limits, sequenced work packages, owner roles, deliverables and pass evidence, open gates and the smallest next step. It is not a spec and writes no files.
+
+Before asking a person to confirm, the executor self-checks and an independent read-only subagent reviews the exact evidence and proposal. A missing or failed review blocks the request. This review does not count as confirmation or final acceptance.
+
 ## How numbered steps advance
 
-Plan has **3** milestones, Spec **6**, Build **8**, and Refine **3**. A call does not run a whole mode. Once a confirmed milestone finishes, call the **same skill again** to work toward its next milestone. Start another mode only by calling it separately.
+Plan has **3** milestones, Spec **6**, Build **8**, and Refine **3**. The diagram below shows Authorization mode. Trust mode follows the same numbered steps, but after self-review it requests fresh confirmation from eligible confirmers without requiring owner re-entry. In Authorization mode, once a confirmed milestone finishes, call the **same skill again** to work toward its next milestone. Start another mode only by calling it separately.
 
 ```mermaid
 flowchart TD
     A["Invoke or re-enter the skill"] --> B["Self-review prior scope, evidence and version; for first step, check inputs"]
     B --> C{"Ready to proceed?"}
-    C -->|"Yes"| D["Propose one milestone: action, deliverable and limits"]
+    C -->|"Yes"| D["Prepare one milestone: action, deliverable and limits"]
     C -->|"Blocked"| E["Report the blocker; propose one correction only if needed"]
-    D --> F["Wait for explicit confirmation of that exact proposal"]
-    E -->|"Correction needed"| F
+    D --> R{"Independent read-only pre-review passed?"}
+    R -->|"No"| G
+    R -->|"Yes"| F["Wait for explicit confirmation of that exact proposal"]
+    E -->|"Correction needed"| R
     E -->|"Missing input"| G["Remain blocked"]
     F -->|"Confirmed"| K{"Verify authority and record confirmation"}
     K -->|"Pass"| H["Execute only the confirmed work"]
@@ -41,11 +47,11 @@ flowchart TD
     L -->|"No"| M["Mode complete; stop. Invoke another mode separately if needed."]
 ```
 
-In text: review the previous result (or first-step inputs), propose one step, wait, execute only that step, report and stop. A failed or missing check blocks progress; ask only about a named correction if new execution is needed. A clear confirmation of the exact pending step is enough; don't ask twice.
+In text: review the previous result (or first-step inputs), prepare one step, obtain independent pre-review, wait, execute only that step, report and stop. A failed or missing check blocks progress; ask only about a named correction if new execution is needed. A clear confirmation of the exact pending step is enough; don't ask twice.
 
-In multi-person work, verify the approver’s identity and authority and record the exact confirmation before acting. If the evidence or authorized audit record is missing, stay blocked.
+Record the human policy grantor and each step’s actual eligible confirmer, authority, original evidence and time. A standing grant alone is not confirmation; missing evidence blocks execution.
 
-For example, once the product spec is ready, invoke `$lg-spec` again. The agent proposes **architecture only** and waits. Confirm that exact architecture step; the agent delivers it and stops. Call `$lg-spec` again for the next milestone. When Spec is frozen, invoke `$lg-build` separately.
+For example, in Authorization mode, once the product spec is ready, invoke `$lg-spec` again. The agent proposes **architecture only** and waits. Confirm that exact architecture step; the agent delivers it and stops. Call `$lg-spec` again for the next milestone. When Spec is frozen, invoke `$lg-build` separately.
 
 ## Optional branches
 

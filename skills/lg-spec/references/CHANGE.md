@@ -25,7 +25,7 @@ Use one row per module; reuse the authorized task sheet if it already has equiva
 
 ## Step audit
 
-For each step, link its exact proposal and original confirmation. Record mode/step ID, pinned revision, scope, deliverable, allowed paths and external-action limits, with the requester, executor, independent reviewer and human approver roles as applicable. For multi-person work, link the approver’s verified account and scoped authority evidence. Record before execution; afterward append actual outcome, evidence/version and blockers to the same authorized record. Never paste secrets or whole conversations.
+Record the Plan mode, eligible confirmers and quorum, verified human grantor, authority, original policy reference, time and approved scope. For each step in either mode record the exact step/revision, scope, deliverable, paths and limits, plus each actual confirmer's verified actor ID and type, authority, original confirmation reference and time. Distinguish confirmer, grantor, executor, requester and independent reviewer. Do not treat a standing grant as confirmation. Missing evidence or quorum blocks execution. Append result and evidence to the same authorized record. Plan records only in authorized durable chat; persist from handoff only in authorized Spec. Never paste secrets or whole conversations.
 
 For interrupted or overlapping work, record the active step owner, exact candidate, observed effects or receipts, and whether work is complete, BLOCKED, or awaiting a separately approved bounded recovery action. Never treat a missing result as permission to rerun.
 

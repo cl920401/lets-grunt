@@ -13,6 +13,10 @@
 | Step authority and audit | Three deterministic cases passed: unauthorized verified third-party blocked, mismatched or missing evidence/record blocked, and exact authorized match passed. Identity and audit storage were not tested on a live service. |
 | Interrupted-step audit | Three illustrative deterministic fixtures passed: overlapping ownership blocks, unknown or interrupted state is not replayed, and already completed work records evidence without rerunning. No live concurrency or crash-resume behavior was tested. |
 | Evidence gate | Four deterministic cases passed: unsupported claims, no-op/skips/cache, stale or mismatched proof and matching independent proof. The manual matrix and live model behavior have not been exercised. |
+| Plan step policy | Structural package checks cover Authorization mode fallback, read-only capture, scoped opt-in, current authority and unchanged explicit skill selection. Existing fixtures cover interrupted/overlapping work and previous evidence. No live agent policy behavior tested. |
+| Approver records | Structural check and illustrative quorum fixture cover both modes, human policy grant, exact-step confirmation, duplicate or excluded actors, stale or missing evidence, external authority boundary and read-only Plan handoff. No live account verification. |
+| Plan #3 handoff | Structural checks and illustrative dependency/evidence fixture verify that a handoff can distinguish ready work from missing prerequisites, evidence or independent review. No live handoff executed. |
+| Pre-human independent review | Structural and illustrative checks cover exact reviewed proposal/evidence, failed/missing/stale or self-review, unavailable subagent, and first-step scope. No live subagent invocation. |
 | Runtime invocation, implicit selection, editor completion and macOS | Not tested. Discovery verifies registration, not model behavior. |
 
 The validation used disposable directories; no real user install, project, repository, or release was touched by these checks.
