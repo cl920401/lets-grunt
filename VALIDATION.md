@@ -17,6 +17,7 @@
 | Approver records | Structural check and illustrative quorum fixture cover both modes, human policy grant, exact-step confirmation, duplicate or excluded actors, stale or missing evidence, external authority boundary and read-only Plan handoff. No live account verification. |
 | Plan #3 handoff | Structural checks and illustrative dependency/evidence fixture verify that a handoff can distinguish ready work from missing prerequisites, evidence or independent review. No live handoff executed. |
 | Pre-human independent review | Structural and illustrative checks cover exact reviewed proposal/evidence, failed/missing/stale or self-review, unavailable subagent, and first-step scope. No live subagent invocation. |
+| Review log | Structural checks verify the bundled template, links, required result types and read-only reviewer boundaries. No live reviewer or audit-store invocation. |
 | Runtime invocation, implicit selection, editor completion and macOS | Not tested. Discovery verifies registration, not model behavior. |
 
 The validation used disposable directories; no real user install, project, repository, or release was touched by these checks.

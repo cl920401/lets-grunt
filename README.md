@@ -59,6 +59,15 @@ For example, in Authorization mode, once the product spec is ready, invoke `$lg-
 - **Independent review on demand:** In a new, independent Codex agent/session, invoke [`$lg-review`](skills/lg-review/SKILL.md) with the pinned candidate, SPEC, authorized paths, acceptance IDs and evidence. For standalone review, confirm the proposed candidate, read scope and report before inspection. It checks what is complete, failed, blocked or not run, and gives a way to verify the gaps. It neither changes the project nor runs its tests. It adds no milestone and cannot replace Build's independent runtime review or acceptance.
 - **Release or operations, only if needed after step 17:** A production deployment is a separate action, not part of delivery. Confirm the exact candidate, target, verification, and rollback before proceeding.
 
+## Key documents
+
+| Document | When to use it |
+| --- | --- |
+| [WORKFLOW.md](skills/lg-spec/references/WORKFLOW.md) | Shared rules, numbered steps, authority and evidence gates across the skills. |
+| [CHANGE.md](skills/lg-spec/references/CHANGE.md) | Handoff template for a scoped change: what changed, who owns it, which regression checks ran, and what remains. |
+| [REVIEW_LOG.md](skills/lg-spec/references/REVIEW_LOG.md) | Template only. The authoritative review results live in the project's existing authorized evidence record, or in an explicitly authorized `docs/REVIEW_LOG.md`. Link to that one record from step or module status. |
+| [VALIDATION.md](VALIDATION.md) | Local package checks, evidence limits and what was not verified in a live session. |
+
 ## Install and remove
 
 Inspect the five directories under [skills](skills) and their [shared workflow](skills/lg-spec/references/WORKFLOW.md). From the unpacked package directory on macOS or Linux:

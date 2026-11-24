@@ -59,6 +59,15 @@ flowchart TD
 - **按需独立复核：** 在新的独立 Codex 代理或会话中调用 [`$lg-review`](skills/lg-review/SKILL.md)，提供锁定版本、SPEC、授权路径、验收项和证据。单独调用时，先明确确认候选版本、只读范围和复核报告，再开始检查。它标明已验证、未通过、受阻和未运行的部分，并给出核对方法。不改项目、不跑测试，不增加里程碑，也不替代 Build 的独立复测或验收。
 - **发布或运维：** 只有第 17 步完成后、确有上线需求时才另行处理。交付不等于上线；行动前单独确认版本、目标环境、验证方法和回滚方案。
 
+## 关键文档
+
+| 文档 | 什么时候看 |
+| --- | --- |
+| [WORKFLOW.md](skills/lg-spec/references/WORKFLOW.md) | 查看各技能共用的规则、编号步骤、授权和证据要求。 |
+| [CHANGE.md](skills/lg-spec/references/CHANGE.md) | 小范围变更的交接模板：改了什么、谁负责、跑了哪些回归、还剩什么。 |
+| [REVIEW_LOG.md](skills/lg-spec/references/REVIEW_LOG.md) | 这是模板。正式复核结果记录在项目已有的授权证据记录里；没有时，可在明确授权后用 `docs/REVIEW_LOG.md`。步骤或模块状态只需链接到这一份记录。 |
+| [VALIDATION.md](VALIDATION.md) | 查看本地检查覆盖了什么、证据的边界，以及哪些行为没有在实际会话中验证。 |
+
 ## 安装与移除
 
 先查看[五个技能](skills)和[共用工作流](skills/lg-spec/references/WORKFLOW.md)。在 macOS 或 Linux 上，于解包后的目录执行：

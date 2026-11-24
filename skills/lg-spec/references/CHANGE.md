@@ -31,4 +31,6 @@ For interrupted or overlapping work, record the active step owner, exact candida
 
 ## Verification record
 
+Link the relevant [review log](REVIEW_LOG.md) entry or authorized chat/trace here and in step or module status. Keep the review result in one place; use the existing authorized evidence record or proposed `docs/REVIEW_LOG.md`, not both.
+
 Record planned, in progress, reported and verified distinctly. For a candidate, link actual artifact or diff and exact revision; for checks, record command, environment, exit outcome, named assertions, executed/skipped/failed counts and a retained run log or independent rerun. Identify who verified; do not mark required skipped, no-op, zero-execution, stale or unsupported claims as passed. For external actions link an original receipt or independently observed target state. Record gaps and blockers.

@@ -16,6 +16,14 @@ Before any request for human step confirmation in either mode, finish the execut
 
 Ask the human to confirm only after the independent reviewer passes the exact proposal. On resume, reuse that review only if proposal, candidate, prior output, evidence and reviewer eligibility remain unchanged and verifiable. A failed, missing, stale or unavailable review is **BLOCKED**: report the issue, or seek correction through the existing rules rather than presenting an unreviewed proposal for confirmation. If the host cannot provide an independent subagent, do not simulate one. This narrow review is neither step confirmation nor the later independent acceptance checks; a reviewer’s report does not itself constitute an AI confirmer’s formal assent. No self-approval or extra numbered step.
 
+## Review log
+
+Keep one discoverable project review log: reuse an existing authorized evidence record that can hold the required rows. Otherwise propose `docs/REVIEW_LOG.md` at an authorized documentation step; no implicit file creation or new access. The [review log template](REVIEW_LOG.md) defines the rows. Link its entry or authorized chat/trace from the step and module status; do not copy identical findings into multiple records.
+
+Keep executor self-check, independent pre-review, formal confirmation and independent QA as distinct entry types; none substitutes for another. Each row binds role and verifiable non-secret actor ID, actual trace reference, time, exact artifact or proposal and revision/digest, scope, PASS/FAIL/BLOCKED, evidence and findings. If no review ran, record BLOCKED and why, with no fictitious reviewer or trace. A missing or stale result cannot pass; mark a replacement as a new row and link the superseded one.
+
+Reviewers and subagents return findings to the coordinator; they do not write the project log. Plan and standalone Review return the current note in chat and write no project files. The authorized coordinating writer links or records it at the next permitted write step. If no destination is authorized, keep the note in the existing authorized chat, retain its reference, and never treat unavailable required audit evidence as a pass.
+
 ## Authority and audit trail
 
 Before execution, record the verified human policy grantor, authority evidence, original policy/grant reference, time, scope and confirmer/quorum rule. For each step record the mode, step or correction ID, pinned revision, scope, deliverable, paths and external-action limits, plus each actual confirmer’s verified identity or auditable AI agent/session ID, actor type, scoped delegation/membership evidence, original confirmation reference and time. Distinguish policy grantor, requester, actual confirmer, executor and independent reviewer. An executor cannot confirm its own step. A standing grant, inferred acceptance, display name, forwarded assent or worker summary is not step confirmation. A revoked, stale or out-of-scope delegation does not count.

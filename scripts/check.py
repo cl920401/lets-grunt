@@ -21,6 +21,11 @@ verify(common.is_file() and not common.is_symlink() and not common.parent.is_sym
        "missing or nonregular shared workflow")
 handoff = common.with_name("CHANGE.md")
 verify(handoff.is_file() and not handoff.is_symlink(), "missing or nonregular handoff template")
+review_log = common.with_name("REVIEW_LOG.md")
+verify(review_log.is_file() and not review_log.is_symlink(), "missing or nonregular review log template")
+for source in (common, handoff):
+    verify("](REVIEW_LOG.md)" in source.read_text(encoding="utf-8"),
+           f"missing review log link in {source}")
 for entry in entries:
     verify(entry.is_file() and not entry.is_symlink() and not entry.parent.is_symlink(),
            f"nonregular skill entry: {entry}")
