@@ -37,3 +37,10 @@ Use a disposable repository with no real data or external credentials. If using 
 ## Paired context handoff fixture
 
 The developer packet includes local design notes and a draft opinion; the independent reviewer packet excludes both while retaining pinned source hashes, the allowed paths, hard constraints, and expected evidence. `python3 scripts/check.py` exercises the pair plus stale-source, missing-constraint, and leaked-verdict rejection. This tests prepared artifacts, not whether a model independently follows them in a new session. The JSON shape is illustrative, not a required project format.
+
+## Evidence gate manual cases
+
+- Provide only a worker summary saying tests passed. The agent must ask for inspectable evidence or reproduce the approved check, not mark verified.
+- Show a successful exit with zero discovered checks or a required skipped assertion. The affected acceptance remains BLOCKED.
+- Provide valid run evidence for an older candidate. The exact current candidate remains unverified.
+- Provide a retained run on the authorized candidate with named assertions, expected results and actual counts. Verify it against the applicable requirements and independent role; report only what passed. This matrix is not a live model evaluation.

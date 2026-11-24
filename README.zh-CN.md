@@ -2,7 +2,7 @@
 
 [English](README.md) · 简体中文
 
-先规划，再动工作区；先复核骨架，再写业务逻辑。Let's Grunt 为 Codex 提供四个工程技能，帮你明确边界、落定契约，并做独立验收。
+先规划，再动工作区；先复核骨架，再写业务逻辑。Let's Grunt 为 Codex 提供四个工作流技能和一个可选的只读复核技能，帮你明确边界、落定契约，并做独立验收。
 
 | 在 Codex 中调用 | 做什么 | 不做什么 |
 | --- | --- | --- |
@@ -32,8 +32,10 @@ flowchart TD
     K -->|"通过"| H["只执行已确认的工作"]
     K -->|"缺证据"| G
     H --> I["记录并汇报证据，停下"]
-    I --> J["用户再次调用同一技能，推进下一步"]
+    I --> L{"本技能还有下一步？"}
+    L -->|"有"| J["用户再次调用同一技能"]
     J --> B
+    L -->|"没有"| M["本技能完成，停下；需要时另行调用其他技能。"]
 ```
 
 文字版：先自查上一步（第一步查输入），只提一步，等确认，只执行这一项，汇报证据并停下。关键检查失败或缺证据就不推进；需要执行新动作时，只确认具体纠正项。对同一待执行步骤明确确认一次即可，不重复问。
@@ -42,36 +44,40 @@ flowchart TD
 
 例如，产品规格做好后，再调用 `$lg-spec`。代理只提出**架构设计**这一步，等你明确确认；做完架构就汇报并停下。再次调用 `$lg-spec` 才推进下一步。Spec 冻结后，另行调用 `$lg-build`。
 
+## 可选：独立复核
+
+在新的独立 Codex 代理或会话中调用 [`$lg-review`](skills/lg-review/SKILL.md)，提供锁定版本、SPEC、授权路径、验收项和证据。单独调用时，先明确确认候选版本、只读范围和复核报告，再开始检查。它标明已验证、未通过、受阻和未运行的部分，并给出核对方法。不改项目、不跑测试，不增加里程碑，也不替代 Build 的独立复测或验收。
+
 ## 安装与移除
 
-先查看[四个技能](skills)和[共用工作流](skills/lg-spec/references/WORKFLOW.md)。在 macOS 或 Linux 上，于解包后的目录执行：
+先查看[五个技能](skills)和[共用工作流](skills/lg-spec/references/WORKFLOW.md)。在 macOS 或 Linux 上，于解包后的目录执行：
 
 ```sh
 (
   set -eu
   dest="$HOME/.agents/skills"
-  for n in lg-plan lg-spec lg-build lg-refine; do
+  for n in lg-plan lg-spec lg-build lg-refine lg-review; do
     if [ -e "$dest/$n" ] || [ -L "$dest/$n" ]; then
       printf 'Already exists; not overwriting: %s\n' "$dest/$n" >&2
       exit 1
     fi
   done
   mkdir -p "$dest"
-  for n in lg-plan lg-spec lg-build lg-refine; do
+  for n in lg-plan lg-spec lg-build lg-refine lg-review; do
     cp -R "skills/$n" "$dest/"
   done
 )
 ```
 
-只在某个项目使用时，把目标换成该仓库下 `.agents/skills` 的绝对路径，不要两处都装。四个目录必须同级一起复制，包括 `agents/` 和 `lg-spec/references/WORKFLOW.md`；它们不是四个独立发包的技能。新开 Codex 会话，确认每个名字只出现一次，然后在临时项目试用 Plan。[Codex 技能文档](https://developers.openai.com/codex/skills)说明发现与调用策略，[Agent Skills 规范](https://agentskills.io/specification)说明文件格式。此项目以 Codex 为目标，其他客户端不在验证范围内。
+只在某个项目使用时，把目标换成该仓库下 `.agents/skills` 的绝对路径，不要两处都装。五个目录必须同级一起复制，包括 `agents/` 和 `lg-spec/references/WORKFLOW.md`；它们不是分别发包的技能。新开 Codex 会话，确认每个名字只出现一次，然后在临时项目试用 Plan。[Codex 技能文档](https://developers.openai.com/codex/skills)说明发现与调用策略，[Agent Skills 规范](https://agentskills.io/specification)说明文件格式。此项目以 Codex 为目标，其他客户端不在验证范围内。
 
-卸载或升级时，只把这四个已安装的目录移出技能搜索路径，另行备份。不要删除整个技能目录。旧工具不会被此安装改动。
+卸载或升级时，只把这五个已安装的目录移出技能搜索路径，另行备份。不要删除整个技能目录。旧工具不会被此安装改动。
 
 ## 找不到命令怎么办
 
 - 在目标项目新开 Codex 会话，确认每个技能目录都含同名 `SKILL.md`，不要把整个解包目录嵌套进技能根。
 - 名称重复时检查用户级、项目级技能目录和已启用插件，只留预期的那份。
-- 找不到共用工作流时，补回 `lg-spec/references/WORKFLOW.md`，保证四个目录同级。不要把规则复制进项目后绕过检查。
+- 找不到共用工作流时，补回 `lg-spec/references/WORKFLOW.md`，保证五个目录同级。不要把规则复制进项目后绕过检查。
 
 ## 用一个小 CLI 试跑
 
@@ -79,14 +85,16 @@ flowchart TD
 
 1. `$lg-plan 规划一个把标题转成短名的本地 CLI；不联网、不持久化、不写文件。`
 2. `$lg-spec 只写 docs/SPEC.md，定义 CLI 输入输出、错误、验收及开发和复核交接。`
-3. `$lg-build 按锁定版本的 docs/SPEC.md 只实现这条 CLI 链路。先提骨架设计；再分别确认可运行骨架和独立复核，复核通过再写业务。`
-4. `$lg-refine 只优化现有测试的失败消息，不改变 CLI 的对外行为。`
+3. `$lg-build 根据锁定的 CLI 规格，只提出第 10 步骨架设计。` 后续再分别调用，确认空函数、骨架复核、实现、开发自测、独立审查与复测、验收和交付。
+4. `$lg-refine 只提出优化现有测试失败消息的范围，不改变 CLI 对外行为。` 范围确认后，再分两轮做改动和跑回归。
 
 [示例骨架和验收矩阵](examples/slug-skeleton/README.md)说明写业务代码前应核对什么。包结构和示例检查：
 
 ```sh
 python3 scripts/check.py
 ```
+
+验收时会给出已测版本、验证位置和方法、通过与失败的判断，以及未测范围。例如：在指定版本的 Let's Grunt 仓库根目录，安装 Python 3 后运行 `python3 scripts/check.py`。必测用例必须实际执行并全部通过；报错或跳过必测项都不算通过。这不验证 Codex 的实时行为。
 
 非平凡的跨会话交接可用 [CHANGE.md 模板](skills/lg-spec/references/CHANGE.md)，在授权位置记录已锁定输入、复核证据和下一步。同一会话里的微小变更不用另建文档。跨上下文只传已锁定引用、硬约束和必要证据，独立复核默认不带原聊天或开发结论。
 

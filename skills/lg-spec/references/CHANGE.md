@@ -26,3 +26,9 @@ Use one row per module; reuse the authorized task sheet if it already has equiva
 ## Step audit
 
 For each step, link its exact proposal and original confirmation. Record mode/step ID, pinned revision, scope, deliverable, allowed paths and external-action limits, with the requester, executor, independent reviewer and human approver roles as applicable. For multi-person work, link the approver’s verified account and scoped authority evidence. Record before execution; afterward append actual outcome, evidence/version and blockers to the same authorized record. Never paste secrets or whole conversations.
+
+For interrupted or overlapping work, record the active step owner, exact candidate, observed effects or receipts, and whether work is complete, BLOCKED, or awaiting a separately approved bounded recovery action. Never treat a missing result as permission to rerun.
+
+## Verification record
+
+Record planned, in progress, reported and verified distinctly. For a candidate, link actual artifact or diff and exact revision; for checks, record command, environment, exit outcome, named assertions, executed/skipped/failed counts and a retained run log or independent rerun. Identify who verified; do not mark required skipped, no-op, zero-execution, stale or unsupported claims as passed. For external actions link an original receipt or independently observed target state. Record gaps and blockers.

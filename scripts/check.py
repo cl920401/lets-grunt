@@ -11,11 +11,11 @@ def verify(test, message):
 
 
 root = Path(__file__).resolve().parents[1]
-expected = {"lg-plan", "lg-spec", "lg-build", "lg-refine"}
+expected = {"lg-plan", "lg-spec", "lg-build", "lg-refine", "lg-review"}
 skills = root / "skills"
 entries = sorted(skills.glob("*/SKILL.md"))
-verify(len(entries) == 4 and {p.parent.name for p in entries} == expected,
-       "expected exactly four skill entries")
+verify(len(entries) == 5 and {p.parent.name for p in entries} == expected,
+       "expected four mode skills and one companion")
 common = skills / "lg-spec" / "references" / "WORKFLOW.md"
 verify(common.is_file() and not common.is_symlink() and not common.parent.is_symlink(),
        "missing or nonregular shared workflow")
@@ -66,7 +66,7 @@ for name, counterpart in (("README.md", "README.zh-CN.md"), ("README.zh-CN.md", 
         if "://" not in link:
             verify((readme.parent / link.split("#", 1)[0]).exists(),
                    f"broken local link {link} in {name}")
-print("Let's Grunt package: 4 skills + shared reference OK", flush=True)
+print("Let's Grunt package: 4 mode skills + 1 companion + shared reference OK", flush=True)
 subprocess.run(
     [sys.executable, "-B", "-m", "unittest", "discover", "-s", "examples/slug-skeleton", "-v"],
     check=True, cwd=root,

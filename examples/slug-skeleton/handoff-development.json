@@ -3,7 +3,7 @@
   "sources": {
     "spec": {
       "path": "README.md",
-      "sha256": "616188a6fac5ec4b9c30d312f4fb9426ab0298e1a43ae4fa94c45db749d12746"
+      "sha256": "cb950aa914700550629b74667a5ba344e12c11a36ca329110f38528d08dfcc35"
     },
     "change": {
       "path": "HANDOFF-CHANGE.md",
