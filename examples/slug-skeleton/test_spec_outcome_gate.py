@@ -59,8 +59,11 @@ class SpecOutcomeGateFixture(unittest.TestCase):
             "## Handoff", 1)[0]
         self.assertIn("one typical path and one critical failure or recovery path", spec)
         self.assertIn("fresh confirmation on the new version", spec)
-        self.assertIn("independent reviewer who did not author the SPEC", spec)
-        self.assertIn("Require a recorded pass on those questions", spec)
+        self.assertIn("read-only reviewer independent of the SPEC authors", spec)
+        self.assertIn("recorded pass on substance for that exact version", spec)
+        self.assertIn("Reuse complete, verifiable #9 evidence", spec)
+        self.assertIn("short result card", spec)
+        self.assertRegex(spec, r"After #9 is complete[^\n]+\*\*Manual next step by host\*\*")
         self.assertIn("Record confirmation outside the pinned SPEC", spec)
         build = workflow.split("### A. Skeleton before logic", 1)[1].split(
             "### B. Implementation and acceptance", 1)[0]

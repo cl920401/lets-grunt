@@ -2,7 +2,7 @@
 name: lg-build
 description: Implement an authorized software slice from pinned contracts, gated by buildable skeleton and independent review.
 license: MIT
-compatibility: Designed for Codex. Install the four skill folders together.
+compatibility: Requires skill loading and authorized access to the shared workflow.
 ---
 
 # Build (scoped execution)
@@ -19,6 +19,8 @@ For substantive or multi-stage work, start a clean development context and a sep
 
 Use shared steps **10–17**, as distinct steps under the chosen policy. At step 10, design the minimal skeleton as a sketch: entry point, signatures, wiring and pseudocode, without creating functions. In the next authorized step, create typed interfaces, empty functions with explicit not-implemented behavior, minimal wiring and pseudocode. Prove they build or pass equivalent checks without reporting business success or performing real side effects. An independent reviewer must verify the same skeleton version before any business implementation in that slice. If independent review is unavailable, stop at the skeleton and report the blocker.
 
+Use shared **Parallel work, one real outcome** and **Driver handoff**. When the slice benefits from separate frontend and backend responsibilities, pin their minimal shared seam at #10 and assign disjoint paths plus an integration owner. Start real behavior only after the existing skeleton gate. Prioritize the risky path; at #14 exercise it with the real adapter, and at #15–16 independently verify the exact integrated candidate. A mock-only frontend, an isolated backend check and a passing skeleton are evidence for their own scopes, not product acceptance.
+
 Use shared **Module progress** after each authorized Build step: record separate development and test/independent results per module, bound to its exact candidate. Reconcile before proposing the next step; if no writable record is authorized, report the rows without writing.
 
-After the separate runnable skeleton (11) and independent skeleton review (12), keep separate implementation (13), developer self-tests (14), independent code review and exact-candidate retest (15), independent acceptance (16), and delivery/outcome evaluation (17). A reviewer reports findings; corrections after failed evidence require a separately and explicitly confirmed developer action and a fresh digest for retest. Delivery is not deployment. Record evidence, gaps and results separately from a passed skeleton. Apply the shared Evidence gate before accepting reported completion or any test claim. Without independent final acceptance on the exact implementation candidate, mark acceptance **BLOCKED**, not passed. If a contract must change, stop affected work and suggest `$lg-spec`; do not invoke it. Do not automatically commit, push, deploy or release.
+After the separate runnable skeleton (11) and independent skeleton review (12), keep separate implementation (13), developer self-tests (14), independent code review and exact-candidate retest (15), independent acceptance (16), and delivery/outcome evaluation (17). A reviewer reports findings; corrections after failed evidence require a separately and explicitly confirmed developer action and a fresh digest for retest. Delivery is not deployment. Record evidence, gaps and results separately from a passed skeleton. Apply the shared Evidence gate before accepting reported completion or any test claim. Without independent final acceptance on the exact implementation candidate, mark acceptance **BLOCKED**, not passed. If a contract must change, stop affected work and point the user to `lg-spec` using **Manual next step by host**. Leave invocation to the user. Do not automatically commit, push, deploy or release.

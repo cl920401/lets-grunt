@@ -2,9 +2,19 @@
 
 English · [简体中文](README.zh-CN.md)
 
-Plan before touching the tree. Review the skeleton before writing business logic. Let's Grunt is a set of four Codex workflow skills with an optional read-only companion reviewer for projects that need explicit scope, documented contracts, and independent acceptance.
+Plan before touching the tree. Review the skeleton before writing business logic. Let's Grunt provides four workflow skills and an optional read-only reviewer. Use a host that can load skill instructions and access the bundled workflow within the project's permissions.
+
+## Optional driver
+
+[Driver prompt conversion](driver/lg-drive/SKILL.md) is a separate coordinator-side skill, not part of the five executor entries. Apply it automatically before each outbound project-task prompt. The owner can speak casually; facts and permissions are preserved, only material decisions are asked, and deliberate ambiguity tests stay ambiguous. Nothing is activated in a host merely by installing the main package.
 
 ## Main flow
+
+Open Plan or Spec in the target project. Supply the project root if the host cannot verify it. Executors and independent reviewers limit reads, searches and writes to the permitted project paths. For necessary outside access, provide the exact path, purpose and narrowest scope and wait for the project initiator's explicit approval. Set a file access policy that scopes reads as well as writes.
+
+**OpenCode**: Open `/agents`, select **Plan**, and verify the active agent before loading `lg-plan` and submitting the request. API callers explicitly select `plan` and verify the actual agent. Skill loading and agent selection leave filesystem limits and step approvals in force. For a Spec or Build handoff, select the appropriate native agent manually if needed before invoking the next skill. Check the effective model if the selected agent has its own model configured. [OpenCode TUI](https://opencode.ai/docs/cli/tui/) · [Agent configuration](https://opencode.ai/docs/agents)
+
+For a handoff, use the next skill's entry verified in the current host. Codex uses `$lg-spec` or `$lg-build`. OpenCode uses `@lg-spec` or `@lg-build` when the native picker lists that skill. A skill selection is separate from an OpenCode slash command. In DSH use the short command that is actually registered. Other supported entries can be used if the current host verifies them. If there is no verified entry, ask the user to load the named skill manually in plain language.
 
 **Plan 1–3 → Spec 4–9 → Build 10–17 → stop at delivery.** Invoke each mode separately. Nothing is published or deployed by completing the main flow.
 
@@ -14,15 +24,19 @@ Plan before touching the tree. Review the skeleton before writing business logic
 | `$lg-spec` | Design architecture, API/UI, data/DDL, and test methods in authorized docs | Write implementation, tests, configuration, or executable migrations |
 | `$lg-build` | Build the authorized slice from a pinned spec. Design the skeleton, then independently review executable stubs before business logic | Skip independent review or assume permission to push or release |
 
-Plan decides the mode and who can confirm each step. **Authorization mode** is the default; **Trust mode** can route confirmations to pre-authorized people or a delegated independent AI. Both wait for a fresh exact-step confirmation and any required quorum. For example, choose a designated maintainer, any authorized project member, or a maintainer plus a delegated independent AI. None can replace human platform permissions or independent acceptance. On Codex hosts that honor `agents/openai.yaml`, Spec, Build, Refine, and Review are explicit-invocation only. Plan uses the host default. This setting governs skill selection, not filesystem access; use the host's read-only sandbox for a stronger guarantee when planning.
+Plan decides the mode and who can confirm each step. **Authorization mode** is the default. **Trust mode** can route confirmations to pre-authorized people or a delegated independent AI. Both wait for a fresh exact-step confirmation and any required quorum. Platform permissions and independent acceptance still apply. On Codex hosts that honor `agents/openai.yaml`, Spec, Build, Refine, and Review are explicit-invocation only. Plan uses the host default. Use the host's filesystem controls to limit where tools can read and write. Read-only mode alone can still allow reads outside the project.
 
 See the [20 milestones and self-review gate](skills/lg-spec/references/WORKFLOW.md#numbered-milestones). Before proposing the next number, the agent checks the previous scope, evidence, exact version and gaps. Missing material evidence blocks progression; self-review does not replace independent review.
 
+Split frontend interaction and backend behavior only when it helps. Pin a minimal shared contract, disjoint ownership and an integration owner. A work split does not imply separate deployment. Verify the highest-risk real scenario on the integrated candidate; a mock or a separately passing component is not product acceptance. See [risk-based delivery examples](examples/risk-based-delivery.md) for client, service, migration and routine changes.
+
 Plan #3 hands the next agent a short, actionable brief: verified goal and limits, sequenced work packages, owner roles, deliverables and pass evidence, open gates and the smallest next step. It is not a spec and writes no files.
 
-Before asking a person to confirm, the executor self-checks and an independent read-only subagent reviews the exact evidence and proposal. A missing or failed review blocks the request. This review does not count as confirmation or final acceptance.
+Before asking a person to confirm, the executor self-checks and obtains independent read-only review of the exact evidence and proposal. Use a verifiable independent session or human reviewer with the required scope. A missing or failed review blocks the request. Step confirmation and final acceptance still require their own evidence.
 
 ## How numbered steps advance
+
+Plan and Spec show the in-scope design and confirmed choices first. Answer material tradeoffs at the end under **Needs your decision**, in a native question card when available. Reversible defaults appear in the design. Step authorization, initiator confirmation and missing evidence get separate labels when needed. Required replies hold only the dependent work. The completed phase ends with one manual next-step hint.
 
 Plan has **3** milestones, Spec **6**, Build **8**, and Refine **3**. The diagram below shows Authorization mode. Trust mode follows the same numbered steps, but after self-review it requests fresh confirmation from eligible confirmers without requiring owner re-entry. In Authorization mode, once a confirmed milestone finishes, call the **same skill again** to work toward its next milestone. Start another mode only by calling it separately.
 
@@ -51,12 +65,12 @@ In text: review the previous result (or first-step inputs), prepare one step, ob
 
 Record the human policy grantor and each step’s actual eligible confirmer, authority, original evidence and time. A standing grant alone is not confirmation; missing evidence blocks execution.
 
-For example, in Authorization mode, once the product spec is ready, invoke `$lg-spec` again. The agent proposes **architecture only** and waits. Confirm that exact architecture step; the agent delivers it and stops. Call `$lg-spec` again for the next milestone. When Spec is frozen, invoke `$lg-build` separately.
+For example, in Authorization mode on Codex, once the product spec is ready, invoke `$lg-spec` again. The agent proposes **architecture only** and waits. After confirmation, the agent delivers that step and stops. Call `$lg-spec` again for the next milestone. When Spec is frozen, invoke `$lg-build` separately.
 
 ## Optional branches
 
-- **Small compatible change (18–20):** Invoke `$lg-refine` for a bounded change such as clearer help text without changing behavior. If a contract needs to change, return to `$lg-spec` instead.
-- **Independent review on demand:** In a new, independent Codex agent/session, invoke [`$lg-review`](skills/lg-review/SKILL.md) with the pinned candidate, SPEC, authorized paths, acceptance IDs and evidence. For standalone review, confirm the proposed candidate, read scope and report before inspection. It checks what is complete, failed, blocked or not run, and gives a way to verify the gaps. It neither changes the project nor runs its tests. It adds no milestone and cannot replace Build's independent runtime review or acceptance.
+- **Small compatible change (18–20):** Load `lg-refine` for a bounded change such as clearer help text. Return to `lg-spec` for a contract change.
+- **Independent review on demand:** In an independent session, load [`lg-review`](skills/lg-review/SKILL.md) (`$lg-review` in Codex) with the pinned candidate, SPEC, authorized paths, acceptance IDs and evidence. Confirm the candidate, read scope and report before inspection. It reports what is complete, failed, blocked or unverified. Build's independent runtime review and acceptance are separate.
 - **Release or operations, only if needed after step 17:** A production deployment is a separate action, not part of delivery. Confirm the exact candidate, target, verification, and rollback before proceeding.
 
 ## Key documents
@@ -70,7 +84,15 @@ For example, in Authorization mode, once the product spec is ready, invoke `$lg-
 
 ## Install and remove
 
-Inspect the five directories under [skills](skills) and their [shared workflow](skills/lg-spec/references/WORKFLOW.md). From the unpacked package directory on macOS or Linux:
+Copy all five directories from [skills](skills) into a skill root active for the target project. Preserve `agents/` and both bundled workflow resources.
+
+| Host | Project skill root |
+| --- | --- |
+| Codex | `.agents/skills/` under the target project. A user-level install can use `~/.agents/skills/`. |
+| OpenCode | `.opencode/skills/` under the target project. Discovery starts at the actual working directory and walks up to the project root. Check compatibility roots too if a skill resolves to the wrong copy. |
+| Other | Use a skill root the current host confirms. Verify discovery and permissions before trying Plan. |
+
+Use one active copy. The following macOS or Linux example uses the Codex user-level root. For a project installation, set `dest` to the absolute path of its skill directory from the table.
 
 ```sh
 (
@@ -89,15 +111,15 @@ Inspect the five directories under [skills](skills) and their [shared workflow](
 )
 ```
 
-For a project-only install, use the target repository's absolute `.agents/skills` path instead. Do not install in both scopes. Copy all five folders together, including `agents/` and `lg-spec/references/WORKFLOW.md`. In a fresh Codex session, check that each name appears once, then try Plan in a disposable project. See [Codex Skills](https://developers.openai.com/codex/skills) for discovery and policy details and the [Agent Skills specification](https://agentskills.io/specification) for the file format. The five installed skills are a bundle, not standalone packages. Codex is the target; other clients are not covered by these checks.
+Open the target project in the host and check that each skill resolves to the intended copy, then try Plan in a disposable project. See [Codex Skills](https://developers.openai.com/codex/skills) and [OpenCode Skills](https://opencode.ai/docs/skills/) for their discovery and permission rules.
 
 To remove or upgrade, move only the five installed folders out of the search path into a new backup directory. Do not delete the whole skills root. Older tools are not modified or removed by this package.
 
-## If a command does not show up
+## If a skill does not show up
 
-- Start a fresh Codex session in the project where you want to use the skill. Check that each exact folder contains its matching `SKILL.md`. Do not nest the package root itself under the skills path.
-- If a command appears twice, check the user skill directory, the project skill directory, and enabled plugins for the same name. Keep only the intended copy.
-- If a command reports a missing workflow, restore `lg-spec/references/WORKFLOW.md` and install the five folders as siblings. Do not copy rules into the project or bypass the gate.
+- Check the active project and working directory, then look up the skill in the host's skill picker or inventory. In OpenCode, look for the skill entry rather than a slash command. Check that each skill directory directly contains its `SKILL.md`.
+- If the skill resolves to the wrong copy, inspect the host's project and user skill roots and its permission settings. Use one active copy of the intended version.
+- If Plan cannot load its workflow, restore its bundled `lg-plan/references/WORKFLOW.md` or supply a verified in-project copy matching the digest in the Plan entry. Maintain the canonical copy in `lg-spec/references/WORKFLOW.md`. Run `python3 -B scripts/check.py --sync-plan-workflow` after changing or repackaging it.
 
 ## Try it on a tiny CLI
 
@@ -114,11 +136,11 @@ The [sample skeleton and acceptance matrix](examples/slug-skeleton/README.md) de
 python3 scripts/check.py
 ```
 
-At acceptance, you should get the tested revision, where and how to verify it, what counts as a pass or a failure, and what was not tested. For example: from the pinned Let's Grunt checkout with Python 3 installed, run `python3 scripts/check.py`. All required local fixtures must run and pass; an error or a skipped required case is not a pass. This does not test live Codex behavior.
+At acceptance, record the tested revision, where and how to verify it, pass criteria and what was untested. `python3 scripts/check.py` checks package structure and synthetic fixtures. Live host behavior, including card delivery, agent selection and skill invocation, requires separate evidence from that host.
 
 For a nontrivial change across sessions, use the [CHANGE.md template](skills/lg-spec/references/CHANGE.md) to record pinned inputs, review evidence, and the next eligible step in an authorized docs path. Tiny same-session changes need no extra file. Pass only pinned references, hard constraints and needed evidence across contexts; a reviewer should not inherit the full chat or developer verdict.
 
-See [verification results](VALIDATION.md) for what this candidate actually tested. See the [release checklist](RELEASE-CHECKLIST.md) for maintainer checks.
+See the [validation record](VALIDATION.md) for prior runs and their coverage. See the [release checklist](RELEASE-CHECKLIST.md) for maintainer checks.
 
 ## License
 
