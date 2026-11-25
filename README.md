@@ -6,7 +6,7 @@ Plan before touching the tree. Review the skeleton before writing business logic
 
 ## Optional driver
 
-[Driver prompt conversion](driver/lg-drive/SKILL.md) is a separate coordinator-side skill, not part of the five executor entries. Apply it automatically before each outbound project-task prompt. The owner can speak casually; facts and permissions are preserved, only material decisions are asked, and deliberate ambiguity tests stay ambiguous. Nothing is activated in a host merely by installing the main package.
+[Driver prompt conversion](driver/lg-drive/SKILL.md) is a separate coordinator-side skill, not part of the five executor entries. Apply it automatically before each outbound project-task prompt. The owner can speak casually; facts and permissions are preserved, and the driver only asks about material decisions. Nothing is activated in a host merely by installing the main package.
 
 ## Main flow
 

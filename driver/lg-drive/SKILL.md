@@ -7,13 +7,12 @@ compatibility: Driver-side preprocessing only; no required host tool or product 
 
 # Driver prompt conversion
 
-Run immediately before each outbound task or steering prompt to a project agent. Consume casual language as-is; the requester does not fill a template. This is not a project phase, a new permission, a test, or an automatic phase change. Do not wrap status queries, tool calls, ordinary replies, or messages the owner typed directly.
+Run immediately before each outbound task or steering prompt to a project agent. Consume casual language as-is; the requester does not fill a template. This does not start a new phase, grant permission, or change modes. Do not wrap status queries, tool calls, ordinary replies, or messages the owner typed directly.
 
 1. Read the latest verified session state, current gate, exact artifact/version, and actual authority. If the same action is in flight or already accepted, **do not send**. Pin only facts and constraints established in this lane; never import another lane's work. Use the sender's real role.
 2. Preserve actual intent, exclusions, permissions, and required evidence. Label an inferred low-risk reversible default as an assumption, not an owner decision. Let the executor choose routine details. An unproven fact stays unknown; ask for the smallest eligible proof instead of guessing.
 3. Choose one eligible action that produces the next independently checkable result or removes its real blocker. Include only the necessary context: desired result; exact scope/gate; one action; observable exit evidence; and a stop rule. No unnecessary plan, tool or platform syntax. Keep existing approvals, hard limits and independent review intact.
 4. If the answer could change a product promise, acceptance, significant risk or permissions, do not guess or dispatch that dependent action. Put only the necessary question last: concrete scenario, invariant that must hold, recommended option and trade-off, one credible alternative, and what acceptance changes. Keep unrelated authorized work moving.
-5. If the owner explicitly wants an ambiguity or skill-tolerance test, preserve their tested wording verbatim, without adding answers, defaults, examples or leading hints to the test payload. Carry mandatory boundaries and identity in a separate envelope or use the host's existing controls. If that separation cannot be preserved safely, report the test limitation rather than substituting a clarified prompt.
 
 ## Choose emphasis by stage and risk
 
@@ -21,6 +20,6 @@ Use the current stage to decide what to extract: Plan scopes the next useful out
 
 For the specific change, identify the outcome to prove, the constraints that must hold, and plausible failure consequences. Let the most consequential unresolved risk and the cheapest conclusive check determine what to verify next. If two risks interact, prefer a small scenario that can distinguish both; otherwise sequence the evidence by consequence and dependency. Project labels and examples are hints, not categories or rules.
 
-This is a reversible decision about order and depth of evidence, not a change to acceptance, permissions or risk gates. If the risk is uncertain, gather the least-cost in-scope evidence; ask only if the missing answer changes a commitment or required check. Do not inject these inferences into a deliberate ambiguity test.
+This is a reversible decision about order and depth of evidence, not a change to acceptance, permissions or risk gates. If the risk is uncertain, gather the least-cost in-scope evidence; ask only if the missing answer changes a commitment or required check.
 
 Output either a short dispatch in the project's language, one consolidated material question, or no send with the reason. The driver uses the verified destination only, then checks actual acceptance or output and deduplicates before any retry. Conversion alone does not permit sending or prove delivery.
