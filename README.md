@@ -59,6 +59,20 @@ For example, in Authorization mode, once the product spec is ready, invoke `$lg-
 - **Independent review on demand:** In a new, independent Codex agent/session, invoke [`$lg-review`](skills/lg-review/SKILL.md) with the pinned candidate, SPEC, authorized paths, acceptance IDs and evidence. For standalone review, confirm the proposed candidate, read scope and report before inspection. It checks what is complete, failed, blocked or not run, and gives a way to verify the gaps. It neither changes the project nor runs its tests. It adds no milestone and cannot replace Build's independent runtime review or acceptance.
 - **Release or operations, only if needed after step 17:** A production deployment is a separate action, not part of delivery. Confirm the exact candidate, target, verification, and rollback before proceeding.
 
+## Loop Beta
+
+**Keep a human in charge of each stage and confirmation.** This beta helps assess progress, organize evidence, and track the next eligible action. It can misread state, miss an authorization gate, or dispatch work twice. Host capabilities differ. Keep unattended runs in disposable fixtures. Keep real file writes, deployments, and releases under direct human control.
+
+From the beta archive, copy `skills/lg-loop-beta` alongside the existing Let's Grunt skill folders if that name is absent. The beta depends on the existing workflow. Open a fresh Codex session in the project and enter:
+
+```text
+$lg-loop-beta Can you help me keep this moving?
+```
+
+Check the actual destination session and the native receipt for the exact action and candidate revision before counting a review as submitted. If the receipt is missing, check the destination before any retry. Stop the affected action while delivery, independent review, or an applicable confirmation is unresolved. Follow the existing mode's re-entry and stop rules.
+
+See the [beta validation and host coverage](LG-LOOP-BETA-VALIDATION.md) and the [replay guide](skills/lg-loop-beta/references/replay.md).
+
 ## Key documents
 
 | Document | When to use it |
@@ -70,7 +84,7 @@ For example, in Authorization mode, once the product spec is ready, invoke `$lg-
 
 ## Install and remove
 
-Inspect the five directories under [skills](skills) and their [shared workflow](skills/lg-spec/references/WORKFLOW.md). From the unpacked package directory on macOS or Linux:
+Inspect the five stable directories under [skills](skills) and their [shared workflow](skills/lg-spec/references/WORKFLOW.md). From the unpacked package directory on macOS or Linux:
 
 ```sh
 (
@@ -89,7 +103,7 @@ Inspect the five directories under [skills](skills) and their [shared workflow](
 )
 ```
 
-For a project-only install, use the target repository's absolute `.agents/skills` path instead. Do not install in both scopes. Copy all five folders together, including `agents/` and `lg-spec/references/WORKFLOW.md`. In a fresh Codex session, check that each name appears once, then try Plan in a disposable project. See [Codex Skills](https://developers.openai.com/codex/skills) for discovery and policy details and the [Agent Skills specification](https://agentskills.io/specification) for the file format. The five installed skills are a bundle, not standalone packages. Codex is the target; other clients are not covered by these checks.
+For a project-only install, use the target repository's absolute `.agents/skills` path instead. Do not install in both scopes. Copy all five folders together, including `agents/` and `lg-spec/references/WORKFLOW.md`. In a fresh Codex session, check that each name appears once, then try Plan in a disposable project. See [Codex Skills](https://developers.openai.com/codex/skills) for discovery and policy details and the [Agent Skills specification](https://agentskills.io/specification) for the file format. The five stable skills form one bundle. Codex is the target; other clients are not covered by these checks.
 
 To remove or upgrade, move only the five installed folders out of the search path into a new backup directory. Do not delete the whole skills root. Older tools are not modified or removed by this package.
 
