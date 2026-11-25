@@ -6,6 +6,9 @@ Use for a substantive change handed to another session, agent, or reviewer. Reus
 | --- | --- |
 | Scope | Task ID, owner, allowed paths, non-goals, requirement IDs |
 | Spec | Exact path plus commit or content digest |
+| Independent Spec Review (#9) | Link to the reviewer's result for the same SPEC version, covering problem, value, direction and tradeoffs |
+| Spec paper walkthrough (#9) | Link to the representative scenarios, expected outcome and gaps for the same SPEC version |
+| Initiator outcome confirmation (#9) | Link to the verified initiator's original explicit confirmation, with actor ID, time and the exact SPEC version |
 | Skeleton review | Exact artifact version, independent reviewer, checks and result or BLOCKED |
 | Implementation | Exact candidate version, changed paths, developer checks |
 | Independent acceptance | Reviewer, exact implementation version, checks and outcomes or BLOCKED |

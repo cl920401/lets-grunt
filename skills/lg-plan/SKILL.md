@@ -13,4 +13,6 @@ Read the planning section in `../lg-spec/references/WORKFLOW.md` relative to thi
 
 Use shared steps **1–3** separately: inspect the current project and known constraints; define the first usable outcome and boundaries; then return the pasteable actionable Plan #3 handoff at step 3 only (see the shared Plan #3 handoff section). Do not write the brief to disk. Ask only about gaps that materially affect the current step. When Plan is complete, stop; the user can invoke `$lg-spec` separately.
 
+On entry or resume, follow the shared **Plan, Spec and Build transitions**. Reuse verifiable discussion and completed steps. Disclose reversible assumptions and continue the authorized step. For a missing material decision or required evidence, identify what is missing, who must answer and where Plan is paused. At #3, clarify any gaps in the goal, boundaries and first useful outcome with the task initiator. Carry their answers and source references into the read-only handoff for Spec, with assumptions recorded separately.
+
 In the first Plan round, ask once which mode to use and who confirms each step, including any required quorum (see shared workflow). Record the choice and its scope/reference in the conversation and the pasteable Plan brief, without writing files.

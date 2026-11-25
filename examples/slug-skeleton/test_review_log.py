@@ -17,3 +17,13 @@ class ReviewLogPackage(unittest.TestCase):
         self.assertIn("they do not write the project log", rules)
         self.assertIn("Plan and standalone Review return the current note in chat", rules)
         self.assertIn("no fictitious reviewer or trace", rules)
+
+    def test_spec_events_have_separate_types_and_handoff_links(self):
+        ref = Path(__file__).resolve().parents[2] / "skills/lg-spec/references"
+        log = (ref / "REVIEW_LOG.md").read_text(encoding="utf-8")
+        change = (ref / "CHANGE.md").read_text(encoding="utf-8")
+        for event in ("Independent Spec Review", "Spec paper walkthrough",
+                      "Initiator outcome confirmation"):
+            self.assertIn(f"**{event}**", log)
+            self.assertIn(f"| {event} (#9) |", change)
+        self.assertIn("formal confirmation type only for numbered-step authorization", log)

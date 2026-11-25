@@ -46,14 +46,14 @@ Use the next applicable number in order. Each numbered item is one separately sc
 | --- | --- | --- |
 | 1 | Plan | Inspect the current project read-only: users, existing code or workflow, known constraints. |
 | 2 | Plan | Define goals and boundaries: what the first version includes and excludes, and how to judge success. |
-| 3 | Plan | Return a pasteable, actionable Plan handoff: verified goal/boundaries/acceptance, work packages with owners and evidence, dependencies, blockers and next step; no file writes. |
+| 3 | Plan | Ask the task initiator about the goal, boundaries and first useful outcome. Return a pasteable, actionable Plan handoff with the answers, acceptance, work packages, owners, evidence, dependencies, blockers and next step. Keep it in chat. |
 | 4 | Spec | Draft product specification: user flow, business rules, states, failures and acceptance measures. |
 | 5 | Spec | Design architecture: modules, key call flow, data ownership, dependencies and open-source reuse, recovery. Mark security, privacy, performance and reliability as required or N/A with reasons. |
 | 6 | Spec | Design API and UI/CLI interactions: inputs, outputs, errors, permissions, states, compatibility. |
 | 7 | Spec | Design the data model and DDL: tables, indexes, constraints, transactions, migration and rollback. Markdown review only; no SQL execution. |
 | 8 | Spec | Design test methods: in-scope behavior versus denial/degradation at boundaries; case, environment, fixture, trigger, expectation and evidence. For each required nonfunctional item specify scenario, pass criterion and observable evidence. |
-| 9 | Spec | Cross-check and freeze the exact SPEC: align architecture/API/DDL/UI/tests; check required nonfunctional items map to acceptance; record version, task division, writable files and blockers. |
-| 10 | Build | Design the smallest skeleton: call flow, signatures, wiring and pseudocode in a sketch, without writing functions or business logic. |
+| 9 | Spec | Have an independent reviewer assess whether the candidate solves the initiator's problem and whether its direction and tradeoffs make sense. Cross-check the design and acceptance, walk through the candidate on paper, and obtain the verified task initiator's confirmation before freezing that exact SPEC version. Record task division, writable files and blockers. |
+| 10 | Build | Verify the freeze, walkthrough and task-initiator confirmation for the exact pinned SPEC. With the regular step authorization, sketch the smallest skeleton: call flow, signatures, wiring and pseudocode. Function and logic work belongs to later steps. |
 | 11 | Build | Create buildable skeleton with wired interfaces and explicit not-implemented outcomes, without real side effects. |
 | 12 | Build | Independently review the exact skeleton’s signatures, wiring and build evidence. A failure blocks business logic. |
 | 13 | Build | Implement the approved slice and relevant tests. Separate development and test roles; contract conflicts go to Spec, not altered acceptance. |
@@ -73,6 +73,19 @@ Step 17 is delivery and evaluation, not deployment. If production release is req
 
 For each authorized read-only planning step, start with a concrete user and desired outcome, the smallest usable path, non-goals and one recommended tradeoff. Check source facts without writing. Ask questions only when the answer could change architecture, product behavior, authority, distribution rights or material cost; state reversible assumptions instead of asking by default. Identify verified facts, decisions, assumptions and blockers separately. A fixture illustrates acceptance; it is not the product.
 
+### Plan, Spec and Build transitions
+
+On entry, resume or a user-directed switch between Plan and Spec or from Spec to Build, first read the available verifiable discussion, handoff and current step state. Check each relevant decision, outcome and authorization against its original source and scope. Carry forward valid evidence and completed work without repeating questions, steps or confirmations. A past confirmation may prove its own step was completed; any new action still needs its own applicable authorization. Never switch modes automatically or report an incomplete Plan as complete.
+
+Classify each missing input before deciding whether to wait:
+
+- **A. Reversible detail.** If the answer can be inferred or corrected without materially affecting the goal, boundaries, first useful outcome, authority or risk, use the available evidence. If it does not resolve the detail and no answer has arrived, tell the user what default or assumption you adopted, what it affects and how it can be corrected. Continue the currently authorized step. Record the assumption as provisional, separate from anything the initiator confirmed.
+- **B. Material decision or required evidence.** If the missing answer could change direction, scope, the first useful outcome, authority or material risk, or if required evidence cannot be verified, identify exactly what is missing, why it matters, who must provide what reply or evidence, and the step where work is paused. Continue the affected work only after the valid response or evidence has been received and recorded. Independent review, same-version SPEC outcome confirmation by the initiator, and numbered-step authorization always require actual verifiable evidence.
+
+If the user invokes Spec directly and a material Plan input is missing, surface and resolve only that input using the same diagnosis. Reuse the completed parts of Plan and wait at the affected prerequisite before starting Spec work that depends on it. Clarifying the missing input does not execute a Plan milestone. If resolving it needs authorized Plan work, ask the user to invoke Plan explicitly. Apply the same diagnosis to missing prerequisites on a return to Plan.
+
+In Build, A applies only to a clearly explainable, low-risk, reversible implementation detail outside the contract and within the current authorized step. Record the assumption, its effect and correction path. If the answer could change a user commitment or an architecture, API, DDL or permission boundary, treat it as B. Pause the affected Build step and point to the exact Spec step that owns the decision. Identify the authorized decision-maker and required reply. Have the user explicitly invoke Spec for contract changes. Keep Build edits within the pinned contract. A missing or unverifiable same-version freeze, substantive independent Spec Review, paper walkthrough, initiator outcome confirmation or numbered-step authorization is always B. Diagnose the missing item and pause even when implementation could otherwise proceed.
+
 ## Specification
 
 Freeze a coherent version before implementation. Keep existing document organization; a small project may combine sections. Only write within the authorized documentation scope. If an input is missing, document the question, recommended default, consequence, and affected work; independent parts can continue. After recording goals, scope each applicable design step separately under the selected gate policy: product specification → architecture → API/UI → data/DDL → test methods → cross-check and freeze. This is a drafting order, not permission to run anything; reconcile dependencies before freezing the specification. Scale depth to risk, use a single page when enough, and mark inapplicable items N/A with a brief reason.
@@ -87,13 +100,25 @@ Freeze a coherent version before implementation. Keep existing document organiza
 | Reuse and authority | Separate actual dependencies from candidates. Record primary source, pinned version, applicable license, reuse boundary and exit plan. For access or AI features, document identities, isolation, revocation, egress, usage source and unknown outcomes. |
 | Acceptance | Map requirements to implementation seams and assertions, environment and evidence. In-scope failure calls for repair; explicitly unsupported behavior tests expected rejection or degradation, not expansion. |
 
+### Spec #9 outcome walkthrough and confirmation
+
+Before the paper walkthrough, an independent reviewer who did not author the SPEC must assess the candidate's substance against the initiator's goal. Ask whether it solves the right problem, whether the proposed outcome is useful, and whether the direction and tradeoffs are justified. Require a recorded pass on those questions before proceeding. A completeness check or a review of the confirmation request format is insufficient. Keep the technical cross-check of architecture, API/UI, data/DDL, test design and nonfunctional criteria against acceptance, and keep the initiator's own outcome confirmation separate.
+
+Using the exact candidate SPEC revision or content digest intended for freezing, walk through one typical path and one critical failure or recovery path using representative inputs. Trace what the user starts with, what they would see, and what happens on failure and recovery where applicable. Reason from the written specification only. Leave product execution, tests and external operations to their authorized stages. Describe in plain language the most likely deliverable, capabilities it will still lack, assumptions or uncertainties that could change the outcome, and whether to proceed on this basis.
+
+Ask the verified human task initiator to confirm explicitly that the expected outcome of this exact SPEC version meets their needs. This product confirmation is separate from technical review, the Plan-defined confirmer policy, and authorization for every numbered step, even when one person fills more than one role. Preserve the existing pre-human independent review and numbered-step approvals. Freeze only after receiving the actual explicit confirmation. If the initiator raises an objection, revise the SPEC within the authorized scope and resolve it. A missing or unverifiable initiator identity, missing or unclear confirmation, a version mismatch, or unresolved conflicting feedback blocks the Build handoff.
+
+Every new SPEC revision or digest requires fresh confirmation on the new version. If the outcome or commitments change, repeat independent Spec Review and the paper walkthrough first. For editorial changes, record why the prior review and scenarios still apply to the new version before requesting fresh confirmation. Record confirmation outside the pinned SPEC so the receipt cannot change its digest.
+
+Use an existing authorized handoff, project evidence record or durable chat. Record the exact SPEC path and revision or content digest, the independent review reference, scenarios and inputs, expected results and gaps, material assumptions, recommendation, and the verified confirmer's identity, confirmation time and original message or receipt reference. Use distinct references for independent Spec Review, the paper walkthrough and the outcome confirmation. Build reviews actual artifacts and run evidence separately.
+
 ## Handoff
 
 Use a common specification version or commit and one owner per writable path. Each role card names the role, task ID, pinned inputs, requirement/test IDs, allowed files, non-goals, prerequisites, verification method, expected evidence, stop condition and status. Report blocked dependencies explicitly. Separate product clarification, development, independent review/testing and coordination. A card is not authorization or proof that an agent ran. If a file is not yet written, include its exact text or a verified readable input rather than a future path.
 
 ### Plan #3 handoff
 
-Return a one-page brief by default in chat, not another project artifact. Separate the verified goal, exclusions and acceptance conditions (with available source anchors) from assumptions, pending choices and blocking unknowns. Preserve the verified mode/confirmation policy and scope reference.
+Before handing off to Spec, ask the task initiator what they want to achieve, where the work should stop, and what first result would actually be useful. Check any answers already on record and ask only about gaps or conflicts. Return a one-page brief by default in chat, not another project artifact. Separate the verified goal, exclusions and acceptance conditions (with available source anchors) from assumptions, pending choices and blocking unknowns. Preserve the initiator's answers and their source references alongside the verified mode/confirmation policy and scope reference.
 
 Break the outcome into the fewest useful work packages. For each give an ID, owner or role (separate development and independent QA where relevant), predecessor IDs or sequence, concrete deliverable, observable completion evidence and any open gate. Identify parallel lanes only where dependencies and write ownership allow it. Mark unnamed owners or unverified inputs as pending; do not invent a decision, assignment, permission or result. End with the exact skill for the human to select (normally `$lg-spec` after Plan), plus the smallest next eligible step and its prerequisite/confirmation. Do not load or invoke it automatically. Scale detail with risk. This is a handoff to Spec, not architecture, API/DDL design, implementation, dispatch or permission to write.
 
@@ -107,7 +132,7 @@ Compress narrative, not constraints. Carry write and external-action limits, non
 
 ### Evidence that survives a new session
 
-- **Spec handoff:** record the exact specification path and revision (commit or content digest), affected requirement IDs, agreed write paths and the validations expected. Unwritten or mutable inputs are not pinned.
+- **Spec handoff:** record the exact specification path and revision (commit or content digest), affected requirement IDs, agreed write paths and the validations expected. Include the independent Spec Review, #9 walkthrough and original initiator confirmation references bound to that version. Unwritten or mutable inputs are not pinned.
 - **Skeleton gate:** record the exact skeleton revision or digest, the independent reviewer and their review result, the actual commands and their outcomes, and any remaining blocker. A developer's self-check is not independent approval.
 - **Acceptance handoff:** record the exact implementation revision, checked requirements, commands, result and untested cases. Keep scope and artifacts available to the next worker rather than relying on chat memory. For a nontrivial cross-session handoff, use the adjacent [CHANGE.md template](CHANGE.md) in a user-authorized documentation path or an existing issue or handoff record. Do not create duplicate records, force the template for tiny same-session changes, or write from Plan. If no destination is authorized, return the evidence in the response instead.
 
@@ -132,6 +157,8 @@ Maintain one row per active submodule in the authorized [CHANGE.md](CHANGE.md) o
 Keep development and testing independent: implemented or developer-tested does not mean independently accepted. Apply the Evidence gate to development and test claims separately. Associate each result with its exact version, preserve prior results as history, and mark affected tests pending or blocked when a changed candidate needs recheck. At self-review, verify both tracks against exact-version proof; never advance one track by inference from the other.
 
 ### A. Skeleton before logic
+
+Before proposing or starting #10, and whenever entering or resuming Build at any step, verify the pinned SPEC against the #9 freeze, independent Spec Review, walkthrough and original product confirmation from the verified task initiator. Require a matching exact version, a clear affirmative confirmation, and no unresolved conflicting feedback. If any check fails, mark #10 **BLOCKED**, pause the affected slice at its current step, and return it to Spec. General assent, a technical review result or a numbered-step approval cannot satisfy this check. Once it passes, #10 still requires its own review and authorization under the selected step policy.
 
 At milestone 10, design one useful vertical slice with a compact diagram or table showing its entry point, dependencies, typed signatures or contracts, and explicit not-implemented outcome. Use pseudocode for validation, authorization, sequencing, side-effect, transaction and failure boundaries as applicable. Deliver a sketch only; do not create runnable stubs until milestone 11 is separately scoped and authorized under the chosen gate policy.
 
